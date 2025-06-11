@@ -1,0 +1,31 @@
+* Goal: understand how docker works under the hood
+* Docker Engine
+	1. Open Source container technology for building and containerizing your applications
+	2. Acts as a client-server application with
+		1. a server with a long running daemon process (dockerd)
+		2. APIs which specify interfaces that programs can use to talk to and instruct a Docker Daemon
+		3. CLI client (docker)
+1. Server - Docker Daemon (dockerd)
+	1. creates and manages Docker Objects, such as images, containers, networks and volumes
+	2. Docker API's contact the Daemon - this is a control component similar to kubernetes api server
+	3. Listens for Docker API requests and manages docker objects. Daemon can also communicate with other daemons to manage docker services.
+2. Docker client - cli
+	1. primary way that many users interact with the docker daemon (dockerd)
+	2. commands like `docker run` is a REST API request the client sends to the docker daemon (dockerd)
+3. Docker Client-Server model
+	1. Client and Daemon can run on same system or have client talk to a centralized Daemon on another server
+	2. Communicate with REST API over UNIX sockets or a network interface
+	
+4. Docker registries (docker hub)
+	1. Stores Docker Images, Docker Hub is a public registry that anyone can use
+5. Docker Objects
+	1. Images, Containers, Volumes, Networks, plugins
+	2. Images
+		1. read only template with instructions for creating a container
+		2. can use multiple images to creating your applications
+			1. ex - Ubuntu image to an apache image
+	3. Containers
+		1. Runnable instance of an image
+		2. actions: create, start, stop, move, delete
+		3. can be connected to 1 or more networks, attach storage, or create an image based on current state
+		4. Final layer of a container is a read/write filesystem
